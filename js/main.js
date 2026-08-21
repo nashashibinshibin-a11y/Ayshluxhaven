@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxNext = document.getElementById('lightboxNext');
 
   // Collect all gallery items for sequence navigation
-  const galleryItems = Array.from(document.querySelectorAll('.gallery-grid .gallery-item')).map(item => {
+  const galleryItems = Array.from(document.querySelectorAll('.gallery-masonry .gallery-photo-item, .gallery-grid .gallery-item')).map(item => {
     return {
       src: item.getAttribute('data-lightbox') || '',
       caption: item.getAttribute('data-caption') || '',
@@ -467,10 +467,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   // Lightbox click handlers for gallery items
-  const galleryItemNodes = document.querySelectorAll('.gallery-grid .gallery-item');
+  const galleryItemNodes = document.querySelectorAll('.gallery-masonry .gallery-photo-item, .gallery-grid .gallery-item');
   galleryItemNodes.forEach((item, index) => {
     item.addEventListener('click', () => {
       openLightboxByIndex(index);
+    });
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightboxByIndex(index);
+      }
     });
   });
 
