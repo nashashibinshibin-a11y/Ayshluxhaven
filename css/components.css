@@ -688,6 +688,13 @@
   }
 }
 
+@media (max-width: 860px) {
+  .booking-bar-wrapper {
+    margin-top: 10px;
+    margin-bottom: 24px;
+  }
+}
+
 @media (max-width: 640px) {
   .floating-call-wrapper {
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));

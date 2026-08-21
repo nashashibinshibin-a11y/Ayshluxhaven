@@ -23,7 +23,7 @@
   <meta name="pinterest" content="nohover">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css?v=20260821_v9">
+  <link rel="stylesheet" href="css/style.css?v=20260821_v11">
 </head>
 <body data-pin-no-hover="true" data-pin-nopin="true">
 
@@ -93,45 +93,70 @@
   </div>
 
   <!-- =========================================================================
-       1. HERO SECTION (Warm, realistic room photography with subtle overlay)
+       1. HERO SECTION (Editorial Boutique Presentation with Dedicated Mobile Hero)
        ========================================================================= -->
   <section class="hero-section" id="hero">
+    <!-- Desktop Photographic Background (Visible on Desktop only) -->
     <div class="hero-background">
-      <!-- Actual hotel suite photograph -->
       <img
         src="./hero image/ChatGPT Image Aug 19, 2026 at 02_34_38 PM.png"
         alt="Aysh Lux Haven Room Interior in Wayanad"
         class="hero-bg-image"
         id="heroImage"
       >
-      <!-- Refined subtle gradient: clear in center, gentle vignette at top and bottom -->
       <div class="hero-overlay"></div>
     </div>
 
     <div class="container hero-content">
-      <div class="reveal">
-        <span class="hero-eyebrow">MADAKIMALA, KAMBALAKKAD &middot; WAYANAD</span>
+      <div class="hero-text-block">
+        <div class="reveal">
+          <span class="hero-eyebrow">MADAKIMALA &middot; KAMBALAKKAD &middot; WAYANAD</span>
+        </div>
+
+        <h1 class="hero-title reveal reveal-delay-1">
+          A peaceful stay<br>in Wayanad.
+        </h1>
+
+        <p class="hero-description reveal reveal-delay-2">
+          Comfortable rooms, warm hospitality, and a peaceful stay in the heart of Wayanad.
+        </p>
+
+        <div class="hero-cta-group reveal reveal-delay-3">
+          <a href="#bookingModal" class="btn btn-primary btn-lg open-booking-modal" id="heroPrimaryCta">
+            <span>CHECK AVAILABILITY &rarr;</span>
+          </a>
+          <a href="#rooms" class="hero-secondary-link" id="heroSecondaryLink">
+            <span>EXPLORE ACCOMMODATION &darr;</span>
+          </a>
+        </div>
       </div>
 
-      <h1 class="hero-title reveal reveal-delay-1">
-        A Haven of Comfort<br>in Wayanad
-      </h1>
-
-      <p class="hero-description reveal reveal-delay-2">
-        Experience restful accommodations, warm hospitality, and a peaceful stay in the heart of Wayanad.
-      </p>
-
-      <div class="hero-cta-group reveal reveal-delay-3">
-        <a href="#bookingModal" class="btn btn-primary btn-lg open-booking-modal" id="heroPrimaryCta">
-          <span>CHECK AVAILABILITY &rarr;</span>
-        </a>
-        <a href="#rooms" class="btn btn-outline btn-lg" id="heroSecondaryCta">
-          <span>VIEW ACCOMMODATIONS</span>
-        </a>
+      <!-- Actual Property Photo Hero Card (Mobile-First Editorial Showcase) -->
+      <div class="hero-mobile-image-card reveal reveal-delay-3">
+        <div
+          class="hero-mobile-img-wrapper"
+          data-lightbox="./hero image/ChatGPT Image Aug 19, 2026 at 02_34_38 PM.png"
+          data-caption="Aysh Lux Haven &bull; Suite Room Interior &bull; Wayanad"
+        >
+          <img
+            src="./hero image/ChatGPT Image Aug 19, 2026 at 02_34_38 PM.png"
+            alt="Aysh Lux Haven Suite Room Interior in Wayanad"
+            class="hero-mobile-img"
+            loading="eager"
+          >
+          <div class="hero-mobile-img-overlay"></div>
+          <div class="hero-mobile-img-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+            <span>ACTUAL PROPERTY PHOTO</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Scroll Down Indicator -->
+    <!-- Scroll Down Indicator (Desktop) -->
     <a href="#about" class="hero-scroll-indicator" aria-label="Scroll down to About section">
       <span>Scroll</span>
       <div class="scroll-line"></div>
@@ -1487,7 +1512,7 @@
   </aside>
 
   <!-- JavaScript Scripts -->
-  <script src="js/main.js?v=20260821_v9"></script>
-  <script src="js/booking.js?v=20260821_v9"></script>
+  <script src="js/main.js?v=20260821_v11"></script>
+  <script src="js/booking.js?v=20260821_v11"></script>
 </body>
 </html>
