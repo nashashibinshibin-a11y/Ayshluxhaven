@@ -668,16 +668,20 @@
   color: var(--text-dark);
 }
 
-/* Persistent Concierge Call Button (+91 92072 86470) */
-.floating-call-wrapper {
+/* Persistent Floating Actions (WhatsApp & Concierge Call) */
+.floating-actions-wrapper {
   position: fixed;
   bottom: 28px;
   right: 28px;
   z-index: 950;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
   pointer-events: none;
 }
 
-.floating-call-btn {
+.floating-action-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -694,11 +698,12 @@
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.25s ease,
               border-color 0.25s ease,
-              box-shadow 0.28s ease;
+              box-shadow 0.28s ease,
+              color 0.25s ease;
   user-select: none;
 }
 
-.floating-call-btn:hover {
+.floating-action-btn:hover {
   transform: translateY(-3px);
   background: #201D19;
   border-color: var(--gold-primary);
@@ -706,11 +711,11 @@
   color: #ffffff;
 }
 
-.floating-call-btn:active {
+.floating-action-btn:active {
   transform: translateY(0);
 }
 
-.call-btn-icon-box {
+.action-btn-icon-box {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -724,24 +729,41 @@
   transition: all 0.25s ease;
 }
 
-.floating-call-btn:hover .call-btn-icon-box {
+.whatsapp-icon-box {
+  background: rgba(37, 211, 102, 0.12);
+  border-color: rgba(37, 211, 102, 0.35);
+  color: #25D366;
+}
+
+.floating-action-btn:hover .call-icon-box {
   background: var(--gold-primary);
   border-color: var(--gold-primary);
   color: var(--text-dark);
 }
 
-.call-btn-label {
+.floating-action-btn:hover .whatsapp-icon-box {
+  background: #25D366;
+  border-color: #25D366;
+  color: #12110F;
+}
+
+.action-btn-label {
   font-family: var(--font-sans);
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--text-primary);
   line-height: 1;
+  transition: color 0.25s ease;
 }
 
-.floating-call-btn:hover .call-btn-label {
+.floating-action-btn:hover .action-btn-label {
   color: var(--gold-light);
+}
+
+.floating-whatsapp-btn:hover .action-btn-label {
+  color: #ffffff;
 }
 
 /* Responsive adjustments */
@@ -769,20 +791,27 @@
 }
 
 @media (max-width: 640px) {
-  .floating-call-wrapper {
+  .floating-actions-wrapper {
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-    right: 16px;
+    right: 14px;
+    gap: 8px;
   }
-  .floating-call-btn {
-    padding: 9px 18px 9px 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 14px rgba(197, 161, 90, 0.3);
+  .floating-action-btn {
+    padding: 7px 14px 7px 8px;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 12px rgba(197, 161, 90, 0.25);
   }
-  .call-btn-icon-box {
-    width: 34px;
-    height: 34px;
+  .action-btn-icon-box {
+    width: 28px;
+    height: 28px;
   }
-  .call-btn-label {
-    font-size: 0.8rem;
+  .action-btn-icon-box svg {
+    width: 14px;
+    height: 14px;
+  }
+  .action-btn-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
   }
   .toast-notice {
     bottom: calc(75px + env(safe-area-inset-bottom, 0px));
