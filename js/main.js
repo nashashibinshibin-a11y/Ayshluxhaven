@@ -319,19 +319,82 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 7. High-Resolution Lightbox Modal
+  // 7. High-Resolution Lightbox Modal with Full Carousel, Keyboard & Touch Swipe Navigation
   const lightboxModal = document.getElementById('imageLightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxIndex = document.getElementById('lightboxIndex');
   const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  // Collect all gallery items for sequence navigation
+  const galleryItems = Array.from(document.querySelectorAll('.gallery-grid .gallery-item')).map(item => {
+    return {
+      src: item.getAttribute('data-lightbox') || '',
+      caption: item.getAttribute('data-caption') || '',
+      title: item.getAttribute('data-title') || '',
+      tag: item.getAttribute('data-tag') || ''
+    };
+  }).filter(item => Boolean(item.src));
+
+  let currentGalleryIndex = 0;
+  let isCustomSingleImage = false;
+
+  const updateLightboxContent = (index) => {
+    if (!galleryItems.length || !lightboxImg) return;
+    currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
+    const current = galleryItems[currentGalleryIndex];
+
+    lightboxImg.style.opacity = '0.3';
+    setTimeout(() => {
+      lightboxImg.src = current.src;
+      lightboxImg.alt = current.title || 'Aysh Lux Haven Property Photography';
+      lightboxImg.style.opacity = '1';
+    }, 80);
+
+    if (lightboxCaption) {
+      lightboxCaption.innerHTML = current.caption || current.title;
+    }
+    if (lightboxIndex) {
+      lightboxIndex.textContent = `PHOTOGRAPH ${currentGalleryIndex + 1} OF ${galleryItems.length}`;
+      lightboxIndex.style.display = 'block';
+    }
+
+    if (lightboxPrev && lightboxNext) {
+      lightboxPrev.style.display = 'flex';
+      lightboxNext.style.display = 'flex';
+    }
+  };
+
+  const openLightboxByIndex = (index) => {
+    if (!lightboxModal || !lightboxImg) return;
+    isCustomSingleImage = false;
+    updateLightboxContent(index);
+    lightboxModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
 
   const openLightbox = (src, caption = '') => {
-    if (lightboxImg && lightboxCaption && lightboxModal) {
-      lightboxImg.src = src;
-      lightboxCaption.innerHTML = caption;
-      lightboxModal.classList.add('open');
-      document.body.style.overflow = 'hidden';
+    if (!lightboxModal || !lightboxImg) return;
+
+    // Check if the clicked image belongs to the gallery sequence
+    const foundIdx = galleryItems.findIndex(g => g.src === src);
+    if (foundIdx !== -1) {
+      openLightboxByIndex(foundIdx);
+      return;
     }
+
+    // Standalone single image preview (e.g., hero room click or room card)
+    isCustomSingleImage = true;
+    lightboxImg.src = src;
+    if (lightboxCaption) lightboxCaption.innerHTML = caption;
+    if (lightboxIndex) lightboxIndex.style.display = 'none';
+    if (lightboxPrev) lightboxPrev.style.display = 'none';
+    if (lightboxNext) lightboxNext.style.display = 'none';
+
+    lightboxModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
@@ -342,33 +405,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const nextLightboxImage = () => {
+    if (!isCustomSingleImage && galleryItems.length > 1) {
+      updateLightboxContent(currentGalleryIndex + 1);
+    }
+  };
+
+  const prevLightboxImage = () => {
+    if (!isCustomSingleImage && galleryItems.length > 1) {
+      updateLightboxContent(currentGalleryIndex - 1);
+    }
+  };
+
   lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxPrev?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    prevLightboxImage();
+  });
+  lightboxNext?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    nextLightboxImage();
+  });
+
   lightboxModal?.addEventListener('click', (e) => {
-    if (e.target === lightboxModal) {
+    if (e.target === lightboxModal || e.target.classList.contains('lightbox-content') || e.target.classList.contains('lightbox-img-wrapper')) {
       closeLightbox();
     }
   });
 
+  // Keyboard navigation for Lightbox
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightboxModal?.classList.contains('open')) {
+    if (!lightboxModal?.classList.contains('open')) return;
+
+    if (e.key === 'Escape') {
       closeLightbox();
+    } else if (e.key === 'ArrowRight') {
+      nextLightboxImage();
+    } else if (e.key === 'ArrowLeft') {
+      prevLightboxImage();
     }
   });
 
-  // Lightbox click handlers for gallery items and property exterior
-  const lightboxTriggers = document.querySelectorAll('.gallery-item, [data-lightbox]');
-  lightboxTriggers.forEach(item => {
-    item.addEventListener('click', () => {
-      const lightboxSrc = item.getAttribute('data-lightbox');
-      const caption = item.getAttribute('data-caption');
+  // Mobile Touch Swipe Navigation for Lightbox
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-      if (lightboxSrc) {
-        openLightbox(lightboxSrc, caption);
+  lightboxModal?.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightboxModal?.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const swipeDelta = touchEndX - touchStartX;
+    if (Math.abs(swipeDelta) > 45) {
+      if (swipeDelta < 0) {
+        nextLightboxImage(); // Swiped left -> Next
       } else {
-        const title = item.querySelector('.placeholder-title')?.textContent || 'Gallery View';
-        const tag = item.querySelector('.placeholder-tag')?.textContent || 'Aysh Lux Haven';
-        showToast(`${title} (${tag}) — High-res photograph will be showcased here.`);
+        prevLightboxImage(); // Swiped right -> Prev
       }
+    }
+  }, { passive: true });
+
+  // Lightbox click handlers for gallery items
+  const galleryItemNodes = document.querySelectorAll('.gallery-grid .gallery-item');
+  galleryItemNodes.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      openLightboxByIndex(index);
+    });
+  });
+
+  // Lightbox click handlers for standalone data-lightbox elements
+  const standaloneTriggers = document.querySelectorAll('[data-lightbox]:not(.gallery-item)');
+  standaloneTriggers.forEach(item => {
+    item.addEventListener('click', () => {
+      const src = item.getAttribute('data-lightbox');
+      const caption = item.getAttribute('data-caption') || '';
+      if (src) openLightbox(src, caption);
     });
   });
 
