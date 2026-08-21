@@ -588,18 +588,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   };
 
-  const destCards = document.querySelectorAll('.dest-card');
+  const destCards = document.querySelectorAll('.dest-tile, .dest-card');
   destCards.forEach(card => {
     card.addEventListener('click', () => {
       const destId = card.getAttribute('data-dest-id');
-      openDestModal(destId);
+      if (destId) openDestModal(destId);
     });
 
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         const destId = card.getAttribute('data-dest-id');
-        openDestModal(destId);
+        if (destId) openDestModal(destId);
       }
     });
   });
