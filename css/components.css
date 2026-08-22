@@ -824,6 +824,11 @@
   color: #ffffff;
 }
 
+/* Desktop & Tablet: Hide Call Now button completely */
+.floating-call-btn {
+  display: none !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 991px) {
   .booking-bar {
@@ -842,6 +847,17 @@
 }
 
 @media (max-width: 860px) {
+  .floating-actions-wrapper {
+    bottom: 24px;
+    right: 20px;
+    gap: 10px;
+  }
+
+  /* Mobile: Show Call Now button stacked above WhatsApp */
+  .floating-call-btn {
+    display: inline-flex !important;
+  }
+
   .booking-bar-wrapper {
     margin-top: 10px;
     margin-bottom: 24px;
@@ -853,6 +869,9 @@
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     right: 14px;
     gap: 8px;
+  }
+  .floating-call-btn {
+    display: inline-flex !important;
   }
   .floating-action-btn {
     padding: 7px 14px 7px 8px;
