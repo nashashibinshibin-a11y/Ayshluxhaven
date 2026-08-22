@@ -1821,16 +1821,18 @@
 }
 
 .credit-logo {
-  height: 18px;
+  height: 15px;
   width: auto;
   object-fit: contain;
   margin: 0;
   display: inline-block;
   vertical-align: middle;
-  transition: filter var(--transition-fast), transform var(--transition-fast);
+  opacity: 0.88;
+  transition: opacity var(--transition-fast), filter var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-credit-pill:hover .credit-logo {
+  opacity: 1;
   filter: brightness(1.15);
 }
 
@@ -2304,7 +2306,7 @@
     font-size: 0.72rem;
   }
   .credit-logo {
-    height: 16px;
+    height: 13px;
     margin: 0;
   }
   .contact-info-card, .contact-form-card {
