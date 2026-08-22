@@ -1694,7 +1694,8 @@
   background: #0E0D0C;
   border-top: 1px solid var(--border-subtle);
   padding-top: 70px;
-  padding-bottom: 36px;
+  padding-bottom: 110px;
+  position: relative;
 }
 
 .footer-top {
@@ -1760,7 +1761,7 @@
   font-weight: 400;
   color: var(--text-muted);
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 18px;
 }
 
 .footer-bottom-info {
@@ -1784,54 +1785,54 @@
 .footer-credit-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(24, 22, 19, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border-subtle);
+  gap: 8px;
+  background: rgba(24, 22, 19, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 161, 90, 0.28);
   border-radius: var(--radius-full);
-  padding: 4px 12px 4px 14px;
+  padding: 6px 14px 6px 16px;
   text-decoration: none;
   color: var(--text-muted);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  transition: all var(--transition-fast);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
 .footer-credit-pill:hover {
-  background: rgba(197, 161, 90, 0.08);
-  border-color: var(--border-gold);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(197, 161, 90, 0.15);
+  background: rgba(197, 161, 90, 0.12);
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(197, 161, 90, 0.2);
 }
 
 .credit-label {
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   font-weight: 400;
-  letter-spacing: 0.02em;
-  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  color: #A8A096;
   transition: color var(--transition-fast);
   white-space: nowrap;
 }
 
 .footer-credit-pill:hover .credit-label {
-  color: var(--text-secondary);
+  color: #E8E2D8;
 }
 
 .credit-logo {
-  height: 38px;
+  height: 52px;
   width: auto;
   object-fit: contain;
-  margin: -10px -4px -10px -4px;
+  margin: -16px -8px -16px -6px;
   display: inline-block;
   vertical-align: middle;
-  filter: brightness(1.02);
+  filter: brightness(1.08);
   transition: filter var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-credit-pill:hover .credit-logo {
-  filter: brightness(1.2);
+  filter: brightness(1.28);
 }
 
 .credit-arrow {
@@ -1840,6 +1841,7 @@
   justify-content: center;
   color: var(--gold-primary);
   line-height: 1;
+  margin-left: 2px;
   transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
@@ -2269,6 +2271,9 @@
   .gallery-photo-hover {
     display: none;
   }
+  .site-footer {
+    padding-bottom: 130px;
+  }
   .footer-top {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -2293,15 +2298,15 @@
     justify-content: flex-start;
   }
   .footer-credit-pill {
-    padding: 3px 10px 3px 12px;
-    gap: 6px;
+    padding: 5px 12px 5px 14px;
+    gap: 7px;
   }
   .credit-label {
-    font-size: 0.68rem;
+    font-size: 0.72rem;
   }
   .credit-logo {
-    height: 34px;
-    margin: -8px -4px;
+    height: 46px;
+    margin: -14px -6px -14px -4px;
   }
   .contact-info-card, .contact-form-card {
     padding: 24px 18px;
