@@ -183,6 +183,15 @@ const WAYANAD_DESTINATIONS = {
   }
 };
 
+// Page Load Entrance Trigger
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  document.body.classList.add('page-loaded');
+} else {
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('page-loaded');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // 0. Suppress Pinterest Browser Extension Overlays
   const disablePinterestHover = () => {
@@ -194,9 +203,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   disablePinterestHover();
 
-  // 1. Header scroll effect
+  // 1. Header scroll effect & Hero Parallax
   const siteHeader = document.querySelector('.site-header');
   const backToTopBtn = document.getElementById('backToTop');
+  const heroImg = document.getElementById('heroImage');
+  const heroTextBlock = document.querySelector('.hero-text-block');
+  let isTicking = false;
 
   const handleScroll = () => {
     const scrollY = window.scrollY;
@@ -206,14 +218,37 @@ document.addEventListener('DOMContentLoaded', () => {
       siteHeader?.classList.remove('scrolled');
     }
 
-    if (scrollY > 500) {
+    if (scrollY > 450) {
       backToTopBtn?.classList.add('visible');
     } else {
       backToTopBtn?.classList.remove('visible');
     }
+
+    // Subtle Desktop Hero Parallax
+    const isDesktop = window.innerWidth > 860;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isDesktop && !prefersReducedMotion && scrollY < window.innerHeight * 1.1) {
+      if (heroImg) {
+        heroImg.style.transform = `translate3d(0, ${scrollY * 0.16}px, 0)`;
+      }
+      if (heroTextBlock) {
+        heroTextBlock.style.transform = `translate3d(0, ${scrollY * 0.06}px, 0)`;
+      }
+    } else {
+      if (heroImg) heroImg.style.transform = '';
+      if (heroTextBlock) heroTextBlock.style.transform = '';
+    }
+
+    isTicking = false;
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(handleScroll);
+      isTicking = true;
+    }
+  }, { passive: true });
   handleScroll();
 
   // 2. Back to top button
@@ -243,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 4. Scroll Reveal Animations (Intersection Observer)
-  const revealElements = document.querySelectorAll('.reveal');
+  const revealElements = document.querySelectorAll('.reveal, .reveal-img, .reveal-fade');
 
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -254,8 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      rootMargin: '0px 0px -40px 0px',
-      threshold: 0.12
+      rootMargin: '0px 0px -30px 0px',
+      threshold: 0.1
     });
 
     revealElements.forEach(el => revealObserver.observe(el));

@@ -13,6 +13,17 @@
 /* --------------------------------------------------------------------------
    1. Header & Navigation (Transparent over Hero)
    -------------------------------------------------------------------------- */
+@keyframes navEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .site-header {
   position: fixed;
   top: 0;
@@ -20,17 +31,21 @@
   width: 100%;
   z-index: 100;
   padding: 20px 0;
-  transition: all var(--transition-smooth);
+  transition: padding var(--transition-smooth),
+              background var(--transition-smooth),
+              border-color var(--transition-smooth),
+              box-shadow var(--transition-smooth);
   background: transparent;
+  animation: navEntrance 0.75s 0.1s var(--ease-luxury) backwards;
 }
 
 .site-header.scrolled {
   padding: 12px 0;
-  background: rgba(18, 17, 15, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-gold);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  background: rgba(18, 17, 15, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(197, 161, 90, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 .nav-container {
@@ -227,10 +242,22 @@
   overflow: hidden;
 }
 
+@keyframes heroImgSettle {
+  from {
+    transform: scale(1.035);
+    opacity: 0.85;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .hero-background {
   position: absolute;
   inset: 0;
   z-index: 1;
+  overflow: hidden;
 }
 
 .hero-bg-image {
@@ -238,6 +265,8 @@
   height: 100%;
   object-fit: cover;
   object-position: center 42%;
+  animation: heroImgSettle 1.5s var(--ease-luxury) forwards;
+  will-change: transform;
 }
 
 .hero-overlay {
@@ -880,14 +909,15 @@
   justify-content: center;
   color: var(--gold-primary);
   margin-bottom: 14px;
-  transition: all var(--transition-fast);
+  transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .amenity-item:hover .amenity-icon {
   background: rgba(197, 161, 90, 0.16);
   border-color: var(--gold-primary);
   color: var(--gold-light);
-  transform: scale(1.05);
+  transform: scale(1.08) rotate(3deg);
+  box-shadow: 0 4px 16px var(--gold-glow);
 }
 
 .amenity-name {
@@ -1109,17 +1139,17 @@
 .dest-modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 2000;
   background: rgba(10, 9, 8, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px;
+  padding: 24px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.38s var(--ease-luxury);
 }
 
 .dest-modal-backdrop.open {
@@ -1139,8 +1169,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transform: scale(0.97) translateY(14px);
-  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.96) translateY(20px);
+  transition: transform 0.42s var(--ease-luxury);
+  will-change: transform;
 }
 
 .dest-modal-backdrop.open .dest-modal-container {
