@@ -1786,29 +1786,29 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(24, 22, 19, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(197, 161, 90, 0.28);
+  background: rgba(22, 20, 18, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(197, 161, 90, 0.22);
   border-radius: var(--radius-full);
-  padding: 6px 14px 6px 16px;
+  padding: 5px 12px 5px 14px;
   text-decoration: none;
   color: var(--text-muted);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
 .footer-credit-pill:hover {
-  background: rgba(197, 161, 90, 0.12);
+  background: rgba(197, 161, 90, 0.1);
   border-color: var(--gold-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(197, 161, 90, 0.2);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 14px rgba(197, 161, 90, 0.18);
 }
 
 .credit-label {
   font-family: var(--font-sans);
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.03em;
   color: #A8A096;
@@ -1821,18 +1821,17 @@
 }
 
 .credit-logo {
-  height: 52px;
+  height: 18px;
   width: auto;
   object-fit: contain;
-  margin: -16px -8px -16px -6px;
+  margin: 0;
   display: inline-block;
   vertical-align: middle;
-  filter: brightness(1.08);
   transition: filter var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-credit-pill:hover .credit-logo {
-  filter: brightness(1.28);
+  filter: brightness(1.15);
 }
 
 .credit-arrow {
@@ -2305,8 +2304,8 @@
     font-size: 0.72rem;
   }
   .credit-logo {
-    height: 46px;
-    margin: -14px -6px -14px -4px;
+    height: 16px;
+    margin: 0;
   }
   .contact-info-card, .contact-form-card {
     padding: 24px 18px;
