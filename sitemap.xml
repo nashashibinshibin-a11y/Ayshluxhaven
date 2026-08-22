@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ayshluxhaven.com/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ayshluxhaven.com/property/Outside%20view.png</image:loc>
+      <image:title>Aysh Lux Haven Property Architecture and Grounds in Wayanad</image:title>
+      <image:caption>Aysh Lux Haven peaceful accommodation in Madakimala, Kambalakkad, Wayanad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ayshluxhaven.com/hero%20image/ChatGPT%20Image%20Aug%2019,%202026%20at%2002_34_38%20PM.png</image:loc>
+      <image:title>Aysh Lux Haven Room Interior in Wayanad</image:title>
+      <image:caption>Comfortable rooms and peaceful stay in Wayanad, Kerala</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ayshluxhaven.com/property/ChatGPT%20Image%20Aug%2020,%202026%20at%2011_48_55%20AM.png</image:loc>
+      <image:title>Aysh Lux Haven Illuminated Facade and Private Parking</image:title>
+      <image:caption>Night view of Aysh Lux Haven with secure private vehicle parking</image:caption>
+    </image:image>
+  </url>
+</urlset>
